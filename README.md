@@ -15,6 +15,9 @@ Dashboard: https://thecodeworld.atlassian.net/secure/RapidBoard.jspa?rapidView=1
    
 # Steps to test the newly added endpoints
 
+# Create Schema (If not present)
+	Schema name: "traveldev"
+
 # Find
 	GET : http://localhost:8080/sample/findAllVehicles
 
