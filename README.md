@@ -1,7 +1,9 @@
 # poc-springboot-travel-app-service
 
-Dashboard: https://thecodeworld.atlassian.net/secure/RapidBoard.jspa?rapidView=1&projectKey=TA
+# Feature branch creation tips:
+Please use "TW" as prefix to branch name which is short form of repository name. (i.e TW - Travel-Web) e.g If there is issue with ID #5 then create your branch like TW-#5 Then create Pull request to merge your branch changes into master.
 
+*Important : Please don't merge the branches directly into master or don't commit anything directly on master.
 
 # Steps to Run the Application:
 
