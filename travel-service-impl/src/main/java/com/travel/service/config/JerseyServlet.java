@@ -22,5 +22,6 @@ public class JerseyServlet extends ResourceConfig{
 				.entrySet()) {
 			register(entry.getValue());
 		}
+		register(CORSResponseFilter.class);
 	}
 }
