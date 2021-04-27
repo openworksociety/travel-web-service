@@ -7,8 +7,9 @@ import org.springframework.stereotype.Repository;
 import com.travel.service.entity.EmployeeExpenseEntity;
 
 @Repository
-public interface EmployeeExpenseRepository extends JpaRepository<EmployeeExpenseEntity, Long>,JpaSpecificationExecutor<EmployeeExpenseEntity> {
+public interface EmployeeExpenseRepository extends JpaRepository<EmployeeExpenseEntity, Long> {
 
+	//,JpaSpecificationExecutor<EmployeeExpenseEntity>
 	/*
 	 * Reference : prisma-integration(new) = com.mediaocean.prisma.integration.domain.repository.DailyPlacementSyncViewRepository
 	 * final Collection<Predicate> predicates = new LinkedList<>(); Path

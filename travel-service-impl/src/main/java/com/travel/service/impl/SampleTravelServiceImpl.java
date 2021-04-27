@@ -1,5 +1,6 @@
 package com.travel.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,10 @@ public class SampleTravelServiceImpl implements SampleTravelService {
 
   @Override
   public List<VehicleDto> findAllVehicles() {
-    List<VehicleEntity> entities = vehicleRepository.findAll();
+   // List<VehicleEntity> entities = vehicleRepository.findAll();
+	  List<VehicleEntity> entities = new ArrayList<VehicleEntity>();
+	  entities.add(VehicleEntity.builder().id(1L).deactive(true).color("RED").number("123").type("BUS").build());
+	  entities.add(VehicleEntity.builder().id(2L).deactive(true).color("PINK").number("111").type("CAR").build());
     return entities.stream().map(VehicleConverter::convertToDTO).collect(Collectors.toList());
   }
 

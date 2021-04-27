@@ -37,7 +37,7 @@ public class PassengerBookingEntity extends AuditEntity{
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_TYPE")
-	private IdentiyTypeEntity identiyTypeEntity;
+	private IdentityTypeEntity identityTypeEntity;
 	
 	@Column(name="ID_NUMBER")
 	private String idNumber;

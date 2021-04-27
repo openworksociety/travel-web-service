@@ -10,7 +10,9 @@ import javax.persistence.Table;
 
 import com.travel.service.entity.common.AuditEntity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -18,6 +20,8 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "EMPLOYEE_EXPENSE")
 public class EmployeeLeaveEntity extends AuditEntity{
 	

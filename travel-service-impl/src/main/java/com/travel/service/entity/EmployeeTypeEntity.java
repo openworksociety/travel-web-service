@@ -5,10 +5,12 @@ import javax.persistence.Table;
 
 import com.travel.service.entity.common.AuditEntity;
 
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @SuperBuilder
+@NoArgsConstructor
 @Table(name = "EMPLOYEE_TYPE")
 public class EmployeeTypeEntity extends AuditEntity{
 	
