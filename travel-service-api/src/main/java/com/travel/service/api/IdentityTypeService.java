@@ -2,27 +2,30 @@ package com.travel.service.api;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.travel.service.dto.IdentityTypeDto;
 
-@Path("identitytype")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@RequestMapping("/identity")
 public interface IdentityTypeService {
 
-	@GET
-	@Path("/findAll")
+	@GetMapping("/hello")
+	String sayHello();
+
+	@ResponseBody
+	@GetMapping("/findAll")
 	List<IdentityTypeDto> findAll();
-	
-	
-	@POST
-	@Path("/create")
-	void create(IdentityTypeDto dto);
+
+	@PostMapping("/create")
+	void create(@RequestBody IdentityTypeDto dto);
+
+	@ResponseBody
+	@GetMapping("/findById/{id}")
+	IdentityTypeDto findById(@PathVariable Long id);
 
 }

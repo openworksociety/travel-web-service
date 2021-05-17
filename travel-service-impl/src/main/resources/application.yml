@@ -9,4 +9,5 @@ spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
 # Hibernate ddl auto (create, create-drop, validate, update)
 spring.jpa.hibernate.ddl-auto: update
 spring.show.sql: true
-#server.port: 8077
+server.port: 8077
+jwt.secret: owstravel
