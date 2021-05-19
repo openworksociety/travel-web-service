@@ -14,7 +14,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.ows.travel.repository.UserRepository;
+import com.ows.travel.security.enums.Privilege;
+import com.ows.travel.security.enums.Role;
 import com.ows.travel.security.model.PrivilegeEntity;
 import com.ows.travel.security.model.RoleEntity;
 import com.ows.travel.security.model.UserEntity;
@@ -68,7 +71,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	public JwtRequest save(JwtRequest user) {
 		UserEntity newUser = UserEntity.builder().username(user.getUsername())
-				.password(bcryptEncoder.encode(user.getPassword())).build();
+				.password(bcryptEncoder.encode(user.getPassword()))
+				.roles(Lists.newArrayList(RoleEntity.builder().name(Role.ROLE_USER.name())
+						.privileges(Lists.newArrayList(PrivilegeEntity.builder().name(Privilege.READ.name()).build()))
+						.build()))
+				.build();
 		UserEntity savedUser = userRepository.save(newUser);
 		return JwtRequest.builder().username(savedUser.getUsername()).password(savedUser.getPassword()).build();
 	}
