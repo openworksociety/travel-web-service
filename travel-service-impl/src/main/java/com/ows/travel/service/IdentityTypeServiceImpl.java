@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class IdentityTypeServiceImpl implements IdentityTypeService {
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String sayHello() {
 		return "Helloo";
 	}

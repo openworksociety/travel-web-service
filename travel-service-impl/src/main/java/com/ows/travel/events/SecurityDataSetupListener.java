@@ -44,24 +44,35 @@ public class SecurityDataSetupListener implements ApplicationListener<ContextRef
 	@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		log.info("Application start event called...");
-		 if (alreadySetup)
-	            return;
-	        PrivilegeEntity readPrivilege
-	          = createPrivilegeIfNotFound(Privilege.READ.name());
-	        PrivilegeEntity writePrivilege
-	          = createPrivilegeIfNotFound(Privilege.WRITE.name());
-	 
-	        List<PrivilegeEntity> adminPrivileges = Arrays.asList(
-	          readPrivilege, writePrivilege);        
-	        createRoleIfNotFound(Role.ROLE_ADMIN.name(), adminPrivileges);
-	        createRoleIfNotFound(Role.ROLE_USER.name(), Arrays.asList(readPrivilege));
+		if (alreadySetup)
+			return;
+		PrivilegeEntity readPrivilege = createPrivilegeIfNotFound(Privilege.READ.name());
+		PrivilegeEntity writePrivilege = createPrivilegeIfNotFound(Privilege.WRITE.name());
+		PrivilegeEntity deletePrivilege = createPrivilegeIfNotFound(Privilege.DELETE.name());
 
-	        RoleEntity adminRole = roleRepository.findByName(Role.ROLE_ADMIN.name());
-	        UserEntity user = UserEntity.builder().username("admin").password(bcryptEncoder.encode("admin")).roles(Arrays.asList(adminRole)).build();
-	        userRepository.save(user);
-	        alreadySetup = true;
+		List<PrivilegeEntity> adminPrivileges = Arrays.asList(readPrivilege, writePrivilege, deletePrivilege);
+		createRoleIfNotFound(Role.ROLE_ADMIN.name(), adminPrivileges);
+		createRoleIfNotFound(Role.ROLE_USER.name(), Arrays.asList(readPrivilege));
+		createRoleIfNotFound(Role.ROLE_MANAGER.name(), Arrays.asList(readPrivilege, writePrivilege));
+		createRoleIfNotFound(Role.ROLE_AGENCY.name(), Arrays.asList(readPrivilege, writePrivilege));
+
+		createUserIfNotFound("admin", Role.ROLE_ADMIN);
+		createUserIfNotFound("user", Role.ROLE_USER);
+		createUserIfNotFound("manager", Role.ROLE_USER);
+		createUserIfNotFound("agency", Role.ROLE_USER);
+
+		alreadySetup = true;
 	}
 
+	private void createUserIfNotFound(String username, Role role) {
+		UserEntity entity = userRepository.findByUsername(username);
+		if (Objects.isNull(entity)) {
+			RoleEntity userRole = roleRepository.findByName(role.name());
+			UserEntity user = UserEntity.builder().username(username).password(bcryptEncoder.encode(username))
+					.roles(Arrays.asList(userRole)).build();
+			userRepository.save(user);
+		}
+	}
 
 	@Transactional
 	private PrivilegeEntity createPrivilegeIfNotFound(String name) {
